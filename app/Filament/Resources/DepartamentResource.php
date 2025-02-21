@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\StateResource\Pages;
-use App\Filament\Resources\StateResource\RelationManagers;
-use App\Models\State;
+use App\Filament\Resources\DepartamentResource\Pages;
+use App\Filament\Resources\DepartamentResource\RelationManagers;
+use App\Models\Departament;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,26 +13,17 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class StateResource extends Resource
+class DepartamentResource extends Resource
 {
-    protected static ?string $model = State::class;
+    protected static ?string $model = Departament::class;
     protected static ?string $navigationGroup = 'System Management';
-    protected static ?string $navigationIcon = 'heroicon-c-building-office';
-    protected static ?int $navigationSort = 6;
+    protected static ?string $navigationIcon = 'heroicon-s-building-office';
+    protected static ?int $navigationSort = 4;
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('country_id')
-                    ->relationship('country', 'name')
-                    ->required(),
                 Forms\Components\TextInput::make('name')
-                    ->required(),
-                Forms\Components\TextInput::make('latitude')
-                    ->numeric(),
-                Forms\Components\TextInput::make('longitude')
-                    ->numeric(),
-                Forms\Components\Toggle::make('is_active')
                     ->required(),
             ]);
     }
@@ -41,28 +32,13 @@ class StateResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('country.name')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('latitude')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('longitude')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -72,6 +48,7 @@ class StateResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -90,9 +67,9 @@ class StateResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListStates::route('/'),
-            'create' => Pages\CreateState::route('/create'),
-            'edit' => Pages\EditState::route('/{record}/edit'),
+            'index' => Pages\ListDepartaments::route('/'),
+            'create' => Pages\CreateDepartament::route('/create'),
+            'edit' => Pages\EditDepartament::route('/{record}/edit'),
         ];
     }
 }
