@@ -1,0 +1,4 @@
+/* Aumentar el tamaño del logo en la pantalla de login */
+.filament-login-page img {
+    height: 6rem !important; /* Ajusta el tamaño según lo que necesites */
+}

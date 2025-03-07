@@ -19,7 +19,7 @@ use Filament\Forms\Get;
 use App\Models\State;
 use App\Models\City;
 use Filament\Forms\Set;
-
+use Filament\Tables\Columns\TextColumn;
 
 
 
@@ -91,10 +91,19 @@ class UserResource extends Resource
 
                     Forms\Components\TextInput::make('postal_code')
                     ->required()
+                
+                ]),
 
-                ])
-                 
-
+                Section::make('Department')
+                ->columns(1)
+                ->schema([
+                    Select::make('department_id')
+                        ->relationship(name: 'departments', titleAttribute: 'name')
+                        ->searchable()
+                        ->preload()
+                        ->live()
+                        ,
+                ]),
 
             ]);
     }
@@ -116,6 +125,9 @@ class UserResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: false),
+                Tables\Columns\TextColumn::make('departments.name')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->sortable()

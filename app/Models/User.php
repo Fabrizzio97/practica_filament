@@ -25,7 +25,9 @@ class User extends Authenticatable
         'state_id',
         'city_id',
         'address',
-        'postal_code'
+        'postal_code',
+        'department_id'
+
     ];
 
     /**
@@ -59,7 +61,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Calendar::class);
     }
     public function departments(){
-        return $this->belongsToMany(departments::class);
+        return $this->belongsToMany(Department::class, 'table_user_department', 'user_id', 'department_id');
     }
     public function holidays(){
         return $this->hasMany(Holidays::class);

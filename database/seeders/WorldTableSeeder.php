@@ -11,6 +11,7 @@ class WorldTableSeeder extends Seeder
      */
     public function run(): void
     {
+        //$this->call(BaseWorldSeeder::class);
         $this->call('Altwaireb\World\Database\Seeders\BaseWorldSeeder');
     }
 }

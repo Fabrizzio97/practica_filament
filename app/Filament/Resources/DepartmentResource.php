@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\DepartamentResource\Pages;
-use App\Filament\Resources\DepartamentResource\RelationManagers;
-use App\Models\Departament;
+use App\Filament\Resources\DepartmentResource\Pages;
+use App\Filament\Resources\DepartmentResource\RelationManagers;
+use App\Models\Department;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class DepartamentResource extends Resource
+class DepartmentResource extends Resource
 {
-    protected static ?string $model = Departament::class;
+    protected static ?string $model = Department::class;
     protected static ?string $navigationGroup = 'System Management';
     protected static ?string $navigationIcon = 'heroicon-s-building-office';
     protected static ?int $navigationSort = 4;
@@ -67,9 +67,9 @@ class DepartamentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDepartaments::route('/'),
-            'create' => Pages\CreateDepartament::route('/create'),
-            'edit' => Pages\EditDepartament::route('/{record}/edit'),
+            'index' => Pages\ListDepartments::route('/'),
+            'create' => Pages\CreateDepartment::route('/create'),
+            'edit' => Pages\EditDepartment::route('/{record}/edit'),
         ];
     }
 }
